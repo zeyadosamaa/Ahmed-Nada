@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>💍 Nada &amp; Ahmed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:#1a0b28;overflow-x:hidden;}
+
+/* Smooth Scroll & Film Grain Overlay */
+html {
+  scroll-behavior: smooth;
+}
+
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Pre-Envelope Loading screen */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #0d0415;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease-out, visibility 0.8s;
+}
+.loading-logo-container {
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: loadLogo 2.3s ease-in-out forwards;
+}
+.loading-monogram {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 6vw, 42px);
+  color: #f5e8d2;
+  letter-spacing: clamp(3px, 1.5vw, 6px);
+  margin-bottom: 12px;
+  text-shadow: 0 0 15px rgba(201,168,76,0.3);
+}
+.loading-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 168, 76, 0.2);
+  border-top-color: #c9a84c;
+  margin: 0 auto 20px;
+  animation: ringRotate 2.5s linear infinite;
+}
+@keyframes loadLogo {
+  0% { opacity: 0; transform: scale(0.95); }
+  30% { opacity: 1; transform: scale(1); }
+  75% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+
+/* Mobile Optimized Typography & Layout */
+.tagline {
+  font-size: clamp(11px, 2.5vw, 13px) !important;
+  letter-spacing: clamp(2px, 1.5vw, 7px) !important;
+  text-transform: uppercase;
+}
+.divider-stars {
+  font-size: clamp(16px, 4vw, 22px) !important;
+  letter-spacing: clamp(3px, 2vw, 10px) !important;
+}
+
+/* Scroll Reveal Styling */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.reveal-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.85s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.85s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.reveal-section.revealed .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* Hero Portrait Frame */
+.hero-portrait-container {
+  width: 230px;
+  height: 310px;
+  margin: 32px auto 16px;
+  position: relative;
+  border-radius: 120px 120px 0 0;
+  padding: 6px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.35), rgba(201, 168, 76, 0.05));
+  box-shadow: 0 8px 32px rgba(180, 100, 100, 0.08);
+}
+.hero-portrait-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 114px 114px 0 0;
+  overflow: hidden;
+  border: 1px solid #c9a84c;
+  position: relative;
+}
+.hero-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes petalDrift{
+  0%  {transform:translateY(-30px) translateX(0) rotate(0deg);opacity:0}
+  10% {opacity:.85}90%{opacity:.6}
+  100%{transform:translateY(110vh) translateX(50px) rotate(600deg);opacity:0}
+}
+@keyframes starTwinkle{0%,100%{opacity:.12}50%{opacity:1}}
+@keyframes floatEnv{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes envOpen{0%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.02);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmerGold{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes goldParticle{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--px),var(--py)) scale(0);opacity:0}}
+@keyframes rsvpPop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes ringRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+.petal{position:absolute;width:10px;height:15px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:0;animation:petalDrift linear infinite;pointer-events:none;}
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;animation:confettiFall linear forwards;pointer-events:none;z-index:999;}
+
+#envelope-screen{
+  min-height:100vh;background:#1a0b28;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;position:relative;overflow:hidden;padding:40px 20px;
+}
+#env-wrap{animation:floatEnv 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;}
+#env-wrap.closing{animation:envOpen .65s cubic-bezier(.4,0,.6,1) forwards!important;}
+.hint-pulse{animation:heartBeat 2.2s ease-in-out infinite;}
+
+#invitation{display:none;}
+.fade-section{animation:fadeUp .8s ease both;}
+
+/* Gold shimmer on names */
+.name-shimmer{
+  position:relative;
+  display:inline-block;
+  min-height: 1.15em;
+  transition: width 0.3s;
+}
+.gold-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:#c9a84c;pointer-events:none;animation:goldParticle 1.2s ease-out forwards;}
+
+/* Music button */
+#music-btn{
+  position:fixed;top:20px;right:20px;z-index:1000;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(58,24,40,.85);border:1px solid #c9a84c;
+  color:#c9a84c;font-size:20px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);transition:transform .2s,background .2s;
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+}
+#music-btn:hover{transform:scale(1.1);background:rgba(58,24,40,1);}
+
+/* Countdown */
+.cbox{background:#3a1828;border-radius:10px;padding:22px 20px;min-width:82px;text-align:center;transition:transform .2s;}
+.cbox:hover{transform:scale(1.06);}
+.cnum{font-size:clamp(32px,6vw,52px);font-weight:300;color:#f5e8d2;line-height:1;}
+.clbl{font-size:12px;letter-spacing:clamp(1px, 1vw, 4px);color:#c9a84c;margin-top:8px;text-transform:uppercase;}
+
+/* 3D Story Flip Card */
+.story-card{
+  flex:1;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  padding:0;
+  height:190px;
+  perspective:1000px;
+}
+.story-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.story-card.flipped .story-card-inner {
+  transform: rotateY(180deg);
+}
+.story-card-front, .story-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  border: 1px solid #f0d0d8;
+  box-shadow: 0 4px 15px rgba(180,100,100,.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.story-card-front {
+  background: #fff;
+}
+.story-card-back {
+  background: linear-gradient(135deg, #fffcfb, #fff0f3);
+  transform: rotateY(180deg);
+}
+.story-dot{width:44px;height:44px;border-radius:50%;background:#3a1828;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;z-index:1;box-shadow:0 0 0 5px #fdf6f0,0 0 0 6px #e8c0c8;}
+
+/* Venue parallax */
+#venue-bg{
+  position:absolute;inset:-60px;background-size:cover;background-position:center;
+  will-change:transform;transition:transform .1s linear;
+}
+#venue-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,11,40,.55),rgba(58,24,40,.7));}
+#venue-content{position:relative;z-index:2;text-align:center;padding:60px 24px;}
+#venue-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+
+/* Photo Booth & Wishing Well centering and styling */
+#booth-section {
+  background: #fdf6f0;
+  padding: 72px 24px;
+  text-align: center;
+}
+#wishes-section {
+  background: linear-gradient(160deg, #fdf0ea, #fde8ec);
+  padding: 72px 24px;
+  text-align: center;
+}
+
+/* RSVP */
+#rsvp-section{background:linear-gradient(160deg,#fdf0ea,#fde8ec);padding:72px 24px;text-align:center;}
+.rsvp-btn{
+  display:inline-block;margin-top:32px;padding:18px 52px;
+  font-family:'Cinzel',serif;font-size:16px;letter-spacing:clamp(1px, 0.8vw, 3px);
+  background:#3a1828;color:#f5e8d2;border:1px solid #c9a84c;
+  border-radius:4px;cursor:pointer;transition:all .3s;
+  box-shadow: 0 0 12px rgba(201,168,76,.2), 0 0 20px rgba(201,168,76,.1);
+}
+.rsvp-btn:hover{background:#c9a84c;color:#3a1828;transform:translateY(-2px);box-shadow:0 0 16px rgba(201,168,76,.4), 0 0 32px rgba(201,168,76,.25);}
+#rsvp-confirm{display:none;animation:rsvpPop .5s ease both;margin-top:32px;}
+
+/* Gallery */
+#gallery-section{background:#fdf6f0;padding:72px 24px;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:900px;margin:40px auto 0;}
+.gallery-placeholder{
+  aspect-ratio:4/3;border-radius:10px;overflow:hidden;position:relative;
+  border:1px solid #f0d0d8;background:#f9f0f4;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(13px,2vw,15px);color:#b06070;font-style:italic;
+}
+.gallery-placeholder:hover{transform:scale(1.03);box-shadow:0 8px 28px rgba(180,100,100,.18);}
+.gallery-placeholder input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.gallery-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+
+/* Save date */
+.save-date-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:28px;padding:14px 36px;
+  font-family:'Cinzel',serif;font-size:14px;letter-spacing:clamp(1px, 0.5vw, 2px);
+  background:transparent;color:#c9a84c;border:1px solid #c9a84c;
+  border-radius:4px;cursor:pointer;transition:all .3s;text-decoration:none;
+  box-shadow: 0 0 10px rgba(201,168,76,.15);
+}
+.save-date-btn:hover{background:#c9a84c;color:#3a1828;box-shadow:0 0 16px rgba(201,168,76,.4), 0 0 32px rgba(201,168,76,.25);}
+
+.gold-divider{height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);}
+.ring-d{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(180,100,100,.1);pointer-events:none;transform:translate(-50%,-50%);}
+
+.closing-section{background:linear-gradient(155deg,#3a1828,#200d18);padding:72px 24px;text-align:center;position:relative;overflow:hidden;}
+
+/* Animated Starfall (Shooting Stars) on Envelope screen */
+#shooting-stars-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.shooting-star {
+  position: absolute;
+  top: -100px;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, #c9a84c, transparent);
+  opacity: 0;
+  transform: rotate(-15deg);
+  animation: shootStar 3s ease-in-out infinite;
+}
+@keyframes shootStar {
+  0% { transform: translateY(0) translateX(0) rotate(-15deg); opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(110vh) translateX(150px) rotate(-15deg); opacity: 0; }
+}
+
+/* Dress Code Swatch styles */
+.palette-swatch {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 0 0 1px #c9a84c;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.palette-swatch:hover {
+  transform: scale(1.15) translateY(-5px);
+}
+
+/* Schedule List styles */
+.schedule-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.schedule-time {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: #c9a84c;
+  width: 90px;
+  font-weight: 600;
+}
+.schedule-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #3a1828;
+  color: #c9a84c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin: 0 20px;
+  border: 1px solid #c9a84c;
+}
+.schedule-details h4 {
+  font-family: 'Cinzel', serif;
+  color: #3a1828;
+  font-size: 16px;
+}
+.schedule-details p {
+  font-size: 14px;
+  color: #7a3a50;
+  font-style: italic;
+}
+
+/* Love Letter Pocket Widget */
+.letter-container {
+  max-width: 500px;
+  margin: 40px auto;
+  position: relative;
+  perspective: 1000px;
+}
+.letter-pocket {
+  background: #3a1828;
+  border: 1px solid #c9a84c;
+  border-radius: 8px;
+  height: 150px;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.letter-seal {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #c9a84c;
+  border: 2px dashed #3a1828;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  animation: heartBeat 2.2s infinite;
+}
+.letter-paper {
+  background: #fdf6f0;
+  border: 1px solid #eddcb5;
+  border-radius: 6px;
+  padding: 30px 24px;
+  color: #3a1828;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 5px;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s;
+  transform: translateY(0);
+  pointer-events: none;
+  opacity: 0;
+}
+.letter-container.open .letter-paper {
+  transform: translateY(-240px);
+  z-index: 3;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Voice Note Player styles */
+.voice-widget {
+  background: rgba(58, 24, 40, 0.85);
+  border: 1px solid #c9a84c;
+  border-radius: 50px;
+  padding: 10px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 320px;
+  margin: 20px auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.voice-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #c9a84c;
+  border: none;
+  color: #3a1828;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.voice-btn:hover {
+  transform: scale(1.1);
+}
+.voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 24px;
+}
+.wave-bar {
+  width: 3px;
+  height: 12px;
+  background: rgba(201, 168, 76, 0.4);
+  border-radius: 3px;
+  transition: height 0.15s ease;
+}
+.voice-widget.playing .wave-bar {
+  animation: danceWave 1.2s ease-in-out infinite alternate;
+}
+.voice-widget.playing .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+.voice-widget.playing .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+.voice-widget.playing .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+.voice-widget.playing .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+.voice-widget.playing .wave-bar:nth-child(6) { animation-delay: 0.1s; }
+.voice-widget.playing .wave-bar:nth-child(7) { animation-delay: 0.25s; }
+.voice-widget.playing .wave-bar:nth-child(8) { animation-delay: 0.35s; }
+@keyframes danceWave {
+  0% { height: 6px; }
+  100% { height: 24px; }
+}
+
+/* Guestbook Wishes Wall */
+.wishes-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 20px;
+  max-width: 900px;
+  margin: 40px auto 0;
+  align-items: start;
+  justify-content: center;
+}
+.wish-card {
+  background: #fff;
+  border: 1px solid #f0d0d8;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(180,100,100,0.06);
+  text-align: left;
+  transition: transform 0.3s ease;
+  transform: rotate(var(--rot));
+  position: relative;
+  overflow: hidden;
+}
+.wish-card:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 8px 24px rgba(180,100,100,0.12);
+  z-index: 5;
+}
+.wish-card::before {
+  content: "📌";
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.wish-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: #3a1828;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.4);
+  padding-bottom: 4px;
+}
+.wish-text {
+  font-style: italic;
+  font-size: 15px;
+  color: #7a3a50;
+  line-height: 1.5;
+}
+.wish-input-container {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #f0d0d8;
+  box-shadow: 0 4px 15px rgba(180,100,100,0.05);
+}
+
+/* Photo Booth Frame styles */
+.booth-container {
+  max-width: 480px;
+  margin: 40px auto 0;
+  background: #fff;
+  border: 1px solid #f0d0d8;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 30px rgba(180,100,100,0.1);
+  position: relative;
+}
+.booth-view {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  background: #200d18;
+  border: 1px solid #eddcb5;
+}
+#booth-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+.booth-overlay {
+  position: absolute;
+  inset: 0;
+  border: 12px solid transparent;
+  border-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect x='5' y='5' width='90' height='90' fill='none' stroke='%23c9a84c' stroke-width='3'/><circle cx='8' cy='8' r='4' fill='%23c9a84c'/><circle cx='92' cy='8' r='4' fill='%23c9a84c'/><circle cx='8' cy='92' r='4' fill='%23c9a84c'/><circle cx='92' cy='92' r='4' fill='%23c9a84c'/></svg>") 12 stretch;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+.booth-overlay-text {
+  font-family: 'Cinzel', serif;
+  color: #c9a84c;
+  font-size: clamp(10px, 2.5vw, 14px);
+  letter-spacing: clamp(0.5px, 0.5vw, 2px);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  background: rgba(26,11,40,0.55);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(201,168,76,0.3);
+}
+.booth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 28px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: clamp(1px, 0.5vw, 2px);
+  background: #3a1828;
+  color: #f5e8d2;
+  border: 1px solid #c9a84c;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(201,168,76,.15);
+}
+.booth-btn:hover {
+  background: #c9a84c;
+  color: #3a1828;
+  box-shadow: 0 0 16px rgba(201,168,76,.4), 0 0 32px rgba(201,168,76,.25);
+}
+#booth-canvas {
+  display: none;
+}
+
+/* Cinematic Ending Section */
+#cinematic-ending {
+  background: #0d0415;
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+.ending-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ending-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ending-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 4vw, 32px);
+  color: #f5e8d2;
+  font-style: italic;
+  max-width: 650px;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 2s ease, transform 2s ease;
+  z-index: 2;
+  text-shadow: 0 0 15px rgba(201,168,76,0.25);
+}
+#cinematic-ending.revealed .ending-quote {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes endingDrift {
+  0% { transform: translateY(20px) translateX(0) scale(0.8); opacity: 0; }
+  15% { opacity: 0.6; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(-120px) translateX(40px) scale(0.4); opacity: 0; }
+}
+
+@media(max-width:600px){
+  .story-row{flex-direction:column!important;align-items:flex-start!important;}
+  .story-row .spacer{display:none!important;}
+  .story-card{margin:0!important;margin-top:12px!important;}
+  .story-dot{margin:0 auto!important;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div class="film-grain"></div>
+<div id="loading-screen">
+  <div class="loading-logo-container">
+    <div class="loading-ring"></div>
+    <div class="loading-monogram">N &amp; A</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:#c9a84c;letter-spacing:3px;font-style:italic;">Nada &amp; Ahmed</div>
+  </div>
+</div>
+
+<!-- Animated ring favicon via canvas -->
+<script>
+(function(){
+  const c=document.createElement('canvas');c.width=32;c.height=32;
+  const ctx=c.getContext('2d');
+  let a=0;
+  function draw(){
+    ctx.clearRect(0,0,32,32);
+    ctx.save();ctx.translate(16,16);ctx.rotate(a);
+    ctx.beginPath();ctx.arc(0,0,11,0,Math.PI*2);
+    ctx.strokeStyle='#c9a84c';ctx.lineWidth=3;ctx.stroke();
+    ctx.beginPath();ctx.arc(8,0,4,0,Math.PI*2);
+    ctx.fillStyle='#c9a84c';ctx.fill();
+    ctx.restore();a+=0.04;
+    requestAnimationFrame(draw);
+  }
+  draw();
+  const lnk=document.createElement('link');
+  lnk.rel='icon';lnk.type='image/png';
+  document.head.appendChild(lnk);
+  setInterval(()=>{lnk.href=c.toDataURL()},50);
+})();
+</script>
+
+<!-- Music -->
+<audio id="bgm" loop preload="auto">
+  <source src="taymoor w shafee2a.m4a" type="audio/mp4"> 
+</audio>
+<button id="music-btn" onclick="toggleMusic()" title="Toggle music">🔇</button>
+
+<!-- ══ ENVELOPE SCREEN ══ -->
+<div id="envelope-screen" onclick="openEnvelope()">
+  <div id="stars"></div>
+  <div id="shooting-stars-container"></div>
+  <div id="petals-bg"></div>
+  <div id="env-wrap">
+    <svg width="300" height="200" viewBox="0 0 300 200" style="filter:drop-shadow(0 0 32px rgba(201,168,76,.42))">
+      <rect x="8" y="55" width="284" height="138" rx="6" fill="#f5e8d2" stroke="#c9a84c" stroke-width="1.2"/>
+      <path d="M8 55 L150 138 L292 55 Z" fill="#eddcb5" stroke="#c9a84c" stroke-width=".8"/>
+      <path d="M8 193 L150 120 L292 193" fill="none" stroke="#c9a84c" stroke-width=".6" opacity=".5"/>
+      <circle cx="150" cy="144" r="20" fill="#8b1a2f" stroke="#c9a84c" stroke-width="1.3"/>
+      <!-- Updated Envelope initials from Z&T to A&N -->
+      <text x="150" y="150" text-anchor="middle" font-size="11" fill="#f5e8d2" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-weight="600">A &amp; N</text>
+      <text x="26"  y="80"  font-size="16" fill="#c9a84c" opacity=".65" font-family="serif">✿</text>
+      <text x="264" y="80"  font-size="16" fill="#c9a84c" opacity=".65" font-family="serif">✿</text>
+      <text x="26"  y="186" font-size="13" fill="#c9a84c" opacity=".4"  font-family="serif">✿</text>
+      <text x="265" y="186" font-size="13" fill="#c9a84c" opacity=".4"  font-family="serif">✿</text>
+    </svg>
+    <div style="margin-top:18px;text-align:center;">
+      <div style="font-family:'Cinzel',Georgia,serif;font-size:20px;color:#f5e8d2;letter-spacing:5px;opacity:.88;">Nada &amp; Ahmed</div>
+    </div>
+    <div class="hint-pulse" style="margin-top:38px;color:#c9a84c;font-size:15px;letter-spacing:5px;text-transform:uppercase;opacity:.9;">✦ Click anywhere to open ✦</div>
+  </div>
+</div>
+
+<!-- ══ INVITATION ══ -->
+<div id="invitation">
+
+  <!-- HERO -->
+  <section style="background:linear-gradient(160deg,#fdf0ea,#fde8ec);padding:72px 24px 60px;text-align:center;position:relative;overflow:hidden;">
+    <div class="ring-d" style="width:480px;height:480px;"></div>
+    <div class="ring-d" style="width:360px;height:360px;border-color:rgba(180,100,100,.07);"></div>
+    <p class="fade-section tagline" style="color:#b06070;margin-bottom:14px;animation-delay:.05s;">Together with their families</p>
+    <h1 class="fade-section name-shimmer" id="name-nada" style="font-family:'Cinzel',serif;font-size:clamp(34px,7vw,64px);color:#3a1828;line-height:1.15;animation-delay:.15s;cursor:default;display:inline-block;">Nada</h1>
+    <div class="fade-section" style="font-size:clamp(20px,4vw,32px);font-style:italic;color:#b06070;letter-spacing:4px;margin:4px 0;animation-delay:.22s;">&amp;</div>
+    <h1 class="fade-section name-shimmer" id="name-ahmed" style="font-family:'Cinzel',serif;font-size:clamp(34px,7vw,64px);color:#3a1828;line-height:1.15;animation-delay:.3s;cursor:default;display:inline-block;">Ahmed</h1>
+    <div class="fade-section" style="margin:24px auto;animation-delay:.38s;">
+      <svg width="180" height="18" viewBox="0 0 180 18"><line x1="0" y1="9" x2="72" y2="9" stroke="#c9a84c" stroke-width=".8"/><text x="90" y="14" text-anchor="middle" font-size="13" fill="#c9a84c" font-family="serif">❧</text><line x1="108" y1="9" x2="180" y2="9" stroke="#c9a84c" stroke-width=".8"/></svg>
+    </div>
+    
+    <!-- Couple Portrait Frame -->
+    <div class="fade-section hero-portrait-container" style="animation-delay:.42s;">
+      <div class="hero-portrait-frame">
+        <img class="hero-portrait-img" src="gallery1.jpeg" alt="Nada & Ahmed Portrait" />
+      </div>
+    </div>
+
+    <p class="fade-section" style="font-style:italic;font-size:clamp(16px,3vw,22px);color:#7a3a50;margin-bottom:6px;animation-delay:.48s;">request the honour of your presence</p>
+    <p class="fade-section" style="font-size:clamp(14px,2.5vw,18px);color:#9a5060;animation-delay:.54s;">at the celebration of their marriage</p>
+    <div class="fade-section" style="margin:32px 0;animation-delay:.62s;">
+      <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3vw,22px);color:#3a1828;letter-spacing:3px;">18 / 9 / 2026</div>
+      <div style="font-size:clamp(13px,2.5vw,16px);color:#9a5060;margin-top:6px;letter-spacing:3px;">At six o'clock in the evening</div>
+      <div style="font-style:italic;font-size:clamp(14px,2.5vw,18px);color:#7a3a50;margin-top:8px;">Four Seasons Hotel, Alexandria, Egypt</div>
+    </div>
+    <div class="fade-section divider-stars" style="color:#c9a84c;animation:shimmerGold 3s ease-in-out infinite;animation-delay:.72s;">✦ ✦ ✦</div>
+    <!-- Save the Date -->
+    <div class="fade-section" style="animation-delay:.85s;margin-top:28px;">
+      <a class="save-date-btn" id="save-date-btn" href="#" onclick="saveDate(event)">📅 &nbsp; Save the Date</a>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="reveal-section" style="background:#3a1828;padding:44px 24px;text-align:center;">
+    <p class="reveal-child reveal-delay-1" style="font-style:italic;font-size:clamp(16px,3vw,24px);color:#f5e8d2;max-width:600px;margin:0 auto;line-height:1.75;letter-spacing:.5px;">"I have found the one whom my soul loves."</p>
+    <p class="reveal-child reveal-delay-2" style="font-size:13px;color:#c9a84c;margin-top:12px;letter-spacing:clamp(2px, 1.2vw, 5px);">— SONG OF SOLOMON 3:4</p>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="reveal-section" style="background:linear-gradient(160deg,#fdf0ea,#fde8ec);padding:72px 24px;text-align:center;">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Counting down to</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:44px;">Our Wedding Day</h2>
+    <div class="reveal-child reveal-delay-3" style="display:flex;justify-content:center;gap:clamp(10px,2.5vw,28px);flex-wrap:wrap;">
+      <div class="cbox"><div class="cnum" id="cd-days">--</div><div class="clbl">Days</div></div>
+      <div class="cbox"><div class="cnum" id="cd-hours">--</div><div class="clbl">Hours</div></div>
+      <div class="cbox"><div class="cnum" id="cd-mins">--</div><div class="clbl">Minutes</div></div>
+      <div class="cbox"><div class="cnum" id="cd-secs">--</div><div class="clbl">Seconds</div></div>
+    </div>
+    <p class="reveal-child reveal-delay-4" style="margin-top:44px;font-style:italic;font-size:17px;color:#9a5060;">Every second brings us closer to forever ♡</p>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- VENUE PARALLAX & MAP -->
+  <section id="venue-section" class="reveal-section" style="position:relative;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:none;margin:0;padding:0;">
+    <div id="venue-bg" style="background-image:url('venue.jpg')"></div>
+    <div id="venue-overlay"></div>
+    <div id="venue-petals"></div>
+    <div id="venue-content">
+      <p class="reveal-child reveal-delay-1 tagline" style="color:#c9a84c;margin-bottom:14px;">Our Celebration Venue</p>
+      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,40px);color:#f5e8d2;margin-bottom:14px;">Four Seasons Hotel</h2>
+      <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:clamp(15px,2.5vw,20px);color:#e8d0b8;margin-bottom:8px;">Alexandria, Egypt</p>
+      <div class="reveal-child reveal-delay-3" style="width:60px;height:1px;background:#c9a84c;margin:18px auto;"></div>
+      <p class="reveal-child reveal-delay-3" style="font-size:clamp(13px,2vw,16px);color:#e8c8b0;letter-spacing:clamp(1px, 0.8vw, 3px);margin-bottom:20px;">18 / 9 / 2026 &nbsp;·&nbsp; 6:00 PM</p>
+      
+      <!-- Interactive Google maps link -->
+      <div class="reveal-child reveal-delay-4">
+        <a class="save-date-btn" href="https://maps.app.goo.gl/VUh5mxBzmfT9YQGs9" target="_blank" style="margin-top:10px;">🗺️ &nbsp; Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- DRESS CODE SECTION -->
+  <section class="reveal-section" style="background:linear-gradient(160deg,#fdf0ea,#fde8ec);padding:72px 24px;text-align:center;">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Dress Code</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:20px;">Wedding Palette</h2>
+    <p class="reveal-child reveal-delay-3" style="font-style:italic;font-size:16px;color:#7a3a50;max-width:480px;margin:0 auto 32px;">We invite you to share in our celebration by choosing attire in harmony with our wedding colors:</p>
+    
+    <div class="reveal-child reveal-delay-4" style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;max-width:500px;margin:0 auto;">
+      <div style="text-align:center;">
+        <div class="palette-swatch" style="background:#6b1224;"></div>
+        <div style="font-size:12px;color:#3a1828;margin-top:8px;font-family:'Cinzel',serif;">Burgundy</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="palette-swatch" style="background:#097969;"></div>
+        <div style="font-size:12px;color:#3a1828;margin-top:8px;font-family:'Cinzel',serif;">Emerald</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="palette-swatch" style="background:#002b49;"></div>
+        <div style="font-size:12px;color:#3a1828;margin-top:8px;font-family:'Cinzel',serif;">Navy</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="palette-swatch" style="background:#ebd49f;"></div>
+        <div style="font-size:12px;color:#3a1828;margin-top:8px;font-family:'Cinzel',serif;">Champagne</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="palette-swatch" style="background:#c0c0c0;"></div>
+        <div style="font-size:12px;color:#3a1828;margin-top:8px;font-family:'Cinzel',serif;">Silver</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- SCHEDULE OF THE DAY -->
+  <section class="reveal-section" style="background:#fdf6f0;padding:72px 24px;">
+    <div style="max-width:600px;margin:0 auto;">
+      <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;text-align:center;margin-bottom:10px;">The Day Plan</p>
+      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;text-align:center;margin-bottom:44px;">Schedule of the Day</h2>
+      
+      <div class="reveal-child reveal-delay-3" style="display:flex;flex-direction:column;gap:12px;">
+        <div class="schedule-item">
+          <div class="schedule-time">6:00 PM</div>
+          <div class="schedule-icon">✿</div>
+          <div class="schedule-details">
+            <h4>Wedding Ceremony</h4>
+            <p>The beginning of our lifetime of promises</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item">
+          <div class="schedule-time">7:30 PM</div>
+          <div class="schedule-icon">🥂</div>
+          <div class="schedule-details">
+            <h4>Dinner &amp; Toast</h4>
+            <p>Savoring the memories with our loved ones</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item">
+          <div class="schedule-time">9:00 PM</div>
+          <div class="schedule-icon">✨</div>
+          <div class="schedule-details">
+            <h4>First Dance</h4>
+            <p>Our first steps together into forever</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item">
+          <div class="schedule-time">10:00 PM</div>
+          <div class="schedule-icon">🎂</div>
+          <div class="schedule-details">
+            <h4>Party &amp; Celebration</h4>
+            <p>Time to celebrate, laugh, and dance the night away!</p>
+          </div>
+        </div>
+        
+        <div class="schedule-item">
+          <div class="schedule-time">11:30 PM</div>
+          <div class="schedule-icon">🚗</div>
+          <div class="schedule-details">
+            <h4>Grand Send-off</h4>
+            <p>Waving goodbye as we embark on our journey</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- OUR STORY (3D Flip Cards) -->
+  <section class="reveal-section" style="background:#fdf6f0;padding:72px 24px;">
+    <div style="max-width:700px;margin:0 auto;">
+      <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;text-align:center;margin-bottom:10px;">Written in the stars</p>
+      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;text-align:center;margin-bottom:14px;">Our Story</h2>
+      <div class="reveal-child reveal-delay-2" style="text-align:center;margin-bottom:48px;">
+        <svg width="140" height="14" viewBox="0 0 140 14"><line x1="0" y1="7" x2="55" y2="7" stroke="#c9a84c" stroke-width=".8"/><text x="70" y="11" text-anchor="middle" font-size="11" fill="#c9a84c" font-family="serif">♡</text><line x1="85" y1="7" x2="140" y2="7" stroke="#c9a84c" stroke-width=".8"/></svg>
+      </div>
+      <div class="reveal-child reveal-delay-3" style="position:relative;" id="story-container">
+        <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,#e8c0c8 15%,#e8c0c8 85%,transparent);transform:translateX(-.5px);"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- LOVE LETTER -->
+  <section class="reveal-section" style="background:linear-gradient(160deg,#fdf0ea,#fde8ec);padding:72px 24px;text-align:center;">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">A Message for You</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:14px;">Love Letter</h2>
+    <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:16px;color:#7a3a50;margin-bottom:32px;">Click the seal of the envelope below to reveal our message to you.</p>
+    
+    <div class="reveal-child reveal-delay-3 letter-container" id="love-letter-widget">
+      <div class="letter-paper">
+        <h3 style="font-family:'Cinzel',serif;color:#3a1828;font-size:18px;margin-bottom:14px;border-bottom:1px dashed #c9a84c;padding-bottom:8px;text-align:left;">Dearest Family &amp; Friends,</h3>
+        <p style="font-style:italic;font-size:15px;color:#7a3a50;line-height:1.75;margin-bottom:16px;text-align:left;">
+          Having you by our side as we begin our lifetime of love is the greatest blessing we could ever ask for. Thank you for sharing in our joy, our laughter, and our dreams. We can't wait to celebrate and dance the night away with you!
+        </p>
+        <div style="font-family:'Cinzel',serif;font-size:14px;color:#c9a84c;text-align:right;font-weight:bold;">— Nada &amp; Ahmed</div>
+      </div>
+      <div class="letter-pocket" onclick="toggleLoveLetter()">
+        <div class="letter-seal">💌</div>
+        <div style="position:absolute;bottom:15px;color:#f5e8d2;font-size:11px;letter-spacing:clamp(1px, 0.8vw, 3px);font-family:'Cinzel',serif;text-transform:uppercase;">Click to Read</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- VOICE NOTE SECTION -->
+  <section class="reveal-section" style="background:#3a1828;padding:54px 24px;text-align:center;">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#c9a84c;margin-bottom:10px;">Listen to Our Message</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(18px,3.5vw,30px);color:#f5e8d2;margin-bottom:20px;">Voice Note from Nada &amp; Ahmed</h2>
+    
+    <audio id="voice-audio" preload="auto">
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="reveal-child reveal-delay-3 voice-widget" id="voice-widget-player">
+      <button class="voice-btn" onclick="toggleVoiceNote()" id="voice-play-btn">▶</button>
+      <div class="voice-waveform">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+      <div style="font-size:11px;color:#c9a84c;font-family:'Cinzel',serif;letter-spacing:1.5px;font-weight:bold;margin-left:4px;" id="voice-timer">00:00</div>
+    </div>
+    <p class="reveal-child reveal-delay-4" style="font-size:13px;color:#f5e8d2;opacity:0.7;margin-top:14px;font-style:italic;">Press play to hear a sweet recording from us to you</p>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- PHOTO GALLERY -->
+  <section id="gallery-section" class="reveal-section">
+    <div style="max-width:900px;margin:0 auto;text-align:center;">
+      <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Captured Moments</p>
+      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:10px;">Our Gallery</h2>
+      <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:16px;color:#9a5060;">Click any frame to add your photo</p>
+      <div class="reveal-child reveal-delay-3 gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- PHOTO BOOTH -->
+  <section id="booth-section" class="reveal-section">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Selfie Frame</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:14px;">Wedding Photo Booth</h2>
+    <p class="reveal-child reveal-delay-3" style="font-style:italic;font-size:16px;color:#7a3a50;max-width:480px;margin:0 auto 24px;">Capture a selfie inside our customized wedding overlay frame to save and share!</p>
+    
+    <div class="reveal-child reveal-delay-4">
+      <button class="booth-btn" id="start-booth-btn" onclick="initPhotoBooth()">📷 &nbsp; Open Photo Booth</button>
+    </div>
+    
+    <div class="booth-container" id="booth-container" style="display:none;">
+      <div class="booth-view">
+        <video id="booth-video" autoplay playsinline></video>
+        <div class="booth-overlay">
+          <div class="booth-overlay-text">Nada &amp; Ahmed · 18.09.2026</div>
+        </div>
+      </div>
+      
+      <div style="display:flex;justify-content:center;gap:12px;">
+        <button class="booth-btn" id="capture-btn" onclick="capturePhoto()">📸 &nbsp; Take Photo</button>
+        <button class="booth-btn" id="retake-btn" onclick="retakePhoto()" style="display:none;">🔄 &nbsp; Retake</button>
+        <button class="booth-btn" id="download-btn" onclick="downloadPhoto()" style="display:none;background:#c9a84c;color:#3a1828;">💾 &nbsp; Download</button>
+      </div>
+      
+      <p id="booth-status" style="font-size:13px;font-style:italic;color:#7a3a50;margin-top:14px;"></p>
+    </div>
+    
+    <canvas id="booth-canvas"></canvas>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- WISHES WALL (GUESTBOOK) -->
+  <section id="wishes-section" class="reveal-section">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Digital Guestbook</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:14px;">Wishes Wall</h2>
+    <p class="reveal-child reveal-delay-3" style="font-style:italic;font-size:16px;color:#7a3a50;max-width:480px;margin:0 auto 32px;">Leave your warm wishes and loving congratulations for Nada &amp; Ahmed below.</p>
+    
+    <div class="reveal-child reveal-delay-4 wish-input-container">
+      <div style="text-align:left;margin-bottom:16px;">
+        <label style="font-family:'Cinzel',serif;font-size:12px;color:#3a1828;letter-spacing:1px;font-weight:bold;display:block;margin-bottom:6px;">Your Name</label>
+        <input type="text" id="wish-name-input" class="form-control" placeholder="Enter your name" style="border:1px solid #f0d0d8;padding:10px 14px;border-radius:6px;width:100%;font-size:15px;color:#3a1828;">
+      </div>
+      <div style="text-align:left;margin-bottom:20px;">
+        <label style="font-family:'Cinzel',serif;font-size:12px;color:#3a1828;letter-spacing:1px;font-weight:bold;display:block;margin-bottom:6px;">Your Congratulatory Message</label>
+        <textarea id="wish-text-input" class="form-control" rows="3" placeholder="Write a sweet message..." style="border:1px solid #f0d0d8;padding:10px 14px;border-radius:6px;width:100%;font-size:15px;color:#3a1828;resize:vertical;"></textarea>
+      </div>
+      <button class="rsvp-btn" style="margin-top:0;width:100%;" onclick="postWish()">Pin Message to Wall 📌</button>
+      <p id="wish-error" style="color:#b06070;font-size:14px;font-style:italic;margin-top:10px;text-align:center;"></p>
+    </div>
+    
+    <div class="reveal-child reveal-delay-4 wishes-board" id="wishes-board">
+      <!-- Loaded dynamically via LocalStorage -->
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- RSVP -->
+  <section id="rsvp-section" class="reveal-section">
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#b06070;margin-bottom:10px;">Your Presence Matters</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);color:#3a1828;margin-bottom:14px;">Will You Join Us?</h2>
+    <p class="reveal-child reveal-delay-3" style="font-style:italic;font-size:clamp(15px,2.5vw,18px);color:#7a3a50;max-width:480px;margin:0 auto;">We would be honoured to celebrate with you on the most beautiful day of our lives.</p>
+    <div class="reveal-child reveal-delay-4">
+      <button class="rsvp-btn" onclick="rsvpYes()">I'll be there 💍</button>
+    </div>
+    <div id="rsvp-confirm">
+      <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+      <p style="font-family:'Cinzel',serif;font-size:22px;color:#3a1828;margin-bottom:10px;">We're so happy!</p>
+      <p style="font-style:italic;font-size:18px;color:#7a3a50;">We can't wait to celebrate with you. See you on September 18th! 💕</p>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing-section reveal-section">
+    <div style="position:absolute;top:16px;left:20px;font-size:52px;opacity:.1;color:#c9a84c;pointer-events:none;">❀</div>
+    <div style="position:absolute;bottom:16px;right:20px;font-size:52px;opacity:.1;color:#c9a84c;pointer-events:none;">❀</div>
+    <p class="reveal-child reveal-delay-1 tagline" style="color:#c9a84c;margin-bottom:18px;">We can't wait to see you</p>
+    <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,38px);color:#f5e8d2;margin-bottom:22px;">Join Us</h2>
+    <p class="reveal-child reveal-delay-3" style="font-style:italic;font-size:clamp(15px,2.5vw,18px);color:#e8c0c8;max-width:460px;margin:0 auto 44px;line-height:1.75;">Your presence would be the greatest gift you could give us on the most beautiful day of our lives.</p>
+    <div class="reveal-child reveal-delay-4" style="display:inline-block;border:1px solid #c9a84c;padding:28px 44px;border-radius:6px;">
+      <div style="font-family:'Cinzel',serif;font-size:17px;color:#f5e8d2;margin-bottom:8px;">Nada &amp; Ahmed</div>
+      <div style="font-size:14px;color:#c9a84c;letter-spacing:3px;">18 / 9 / 2026 &nbsp;·&nbsp; Alexandria</div>
+    </div>
+    <div class="reveal-child reveal-delay-4" style="margin-top:48px;font-style:italic;font-size:18px;color:#e8c0c8;letter-spacing:1px;">✦ &nbsp; With all our love &nbsp; ✦</div>
+  </section>
+
+  <!-- CINEMATIC ENDING -->
+  <section id="cinematic-ending" class="reveal-section">
+    <div class="ending-stars" id="ending-stars"></div>
+    <div class="ending-particles" id="ending-particles"></div>
+    <div class="ending-quote">
+      "And so together, they built a life they loved."
+    </div>
+  </section>
+
+</div><!-- /#invitation -->
+
+<script>
+// Nada & Ahmed Story timeline card items
+const story=[
+  {icon:"✨",label:"First Glance",date:"Spring 2022",text:"Two souls crossed paths unexpectedly — a moment that quietly rewrote the rest of their story."},
+  {icon:"💌",label:"First Words",date:"Summer 2022",text:"A conversation that started with hello and never quite found its ending."},
+  {icon:"🌙",label:"Midnight Calls",date:"Autumn 2022",text:"Hours dissolved into minutes. They talked until the stars went to sleep."},
+  {icon:"💍",label:"He Asked",date:"February 2024",text:"Under a canopy of roses and candlelight, Ahmed asked Nada to share in a lifetime of dreams."},
+  {icon:"🕊️",label:"Forever",date:"September 2026",text:"And now, we invite you to witness the beginning of our forever together."},
+];
+
+/* ── Stars ── */
+(function(){
+  const c=document.getElementById('stars');
+  c.style.cssText='position:absolute;inset:0;pointer-events:none;';
+  for(let i=0;i<60;i++){
+    const sz=Math.random()*2.5+.5,s=document.createElement('div');
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:#fff;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*.5+.15};animation:starTwinkle ${2+Math.random()*4}s ${Math.random()*4}s ease-in-out infinite;`;
+    c.appendChild(s);
+  }
+})();
+
+/* ── Envelope petals ── */
+(function(){
+  const c=document.getElementById('petals-bg');
+  c.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;';
+  const cols=['#f4b8c8','#f9d4dc','#fbc4d0','#f8a8bc'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${cols[i%cols.length]};animation-duration:${6+Math.random()*7}s;animation-delay:${Math.random()*8}s;`;
+    c.appendChild(p);
+  }
+})();
+
+/* ── Spawning Shooting Stars Starfall ── */
+(function(){
+  const container = document.getElementById('shooting-stars-container');
+  if(!container) return;
+  function spawnShootingStar(){
+    // Only spawn while envelope screen is visible
+    if(document.getElementById('envelope-screen').style.display === 'none') return;
+    const s = document.createElement('div');
+    s.className = 'shooting-star';
+    s.style.left = Math.random() * 80 + '%';
+    s.style.top = Math.random() * -50 + 'px';
+    const scale = Math.random() * 0.5 + 0.75;
+    s.style.transform = `scale(${scale}) rotate(-15deg)`;
+    s.style.animationDuration = Math.random() * 1.5 + 1.5 + 's';
+    container.appendChild(s);
+    setTimeout(() => s.remove(), 3000);
+  }
+  // Spawn stars periodically
+  setInterval(spawnShootingStar, 2000);
+  for(let i=0; i<3; i++) setTimeout(spawnShootingStar, i * 600);
+})();
+
+/* ── Music ── */
+let musicStarted=false,muted=false;
+const bgm=document.getElementById('bgm');
+bgm.volume=0;
+
+function fadeInMusic(){
+  if(musicStarted)return;
+  musicStarted=true;
+  bgm.play().then(()=>{
+    let v=0;
+    const t=setInterval(()=>{
+      v=Math.min(v+.02,.65);
+      bgm.volume=v;
+      if(v>=.65)clearInterval(t);
+    },120);
+    const btn=document.getElementById('music-btn');
+    btn.style.display='flex';
+    btn.textContent='🔊';
+  }).catch(()=>{
+    const btn=document.getElementById('music-btn');
+    btn.style.display='flex';
+    btn.textContent='▶';
+  });
+}
+
+function toggleMusic(){
+  const btn=document.getElementById('music-btn');
+  if(!musicStarted){
+    bgm.play();musicStarted=true;
+    bgm.volume=.65;btn.textContent='🔊';
+  } else if(muted){
+    bgm.muted=false;muted=false;btn.textContent='🔊';
+  } else {
+    bgm.muted=true;muted=true;btn.textContent='🔇';
+  }
+}
+
+/* ── Confetti burst ── */
+function spawnConfetti(){
+  const cols=['#c9a84c','#f4b8c8','#f5e8d2','#8b1a2f','#ffffff'];
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText=`left:${20+Math.random()*60}%;top:-10px;background:${cols[i%cols.length]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.5}s;transform:rotate(${Math.random()*360}deg);`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),4000);
+  }
+}
+
+/* ── Gold particle shimmer on names ── */
+function spawnGoldSparks(el){
+  const rect=el.getBoundingClientRect();
+  for(let i=0;i<12;i++){
+    const s=document.createElement('div');
+    s.className='gold-spark';
+    const dx=(Math.random()-0.5)*80+'px';
+    const dy=(Math.random()-1)*60+'px';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--px:${dx};--py:${dy};animation-delay:${Math.random()*.3}s;`;
+    el.appendChild(s);
+    setTimeout(()=>s.remove(),1500);
+  }
+}
+['name-nada','name-ahmed'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('mouseenter',()=>spawnGoldSparks(el));
+});
+
+/* ── Typewriter Effect ── */
+function typeWriter(elementId, text, speed, callback) {
+  let i = 0;
+  const el = document.getElementById(elementId);
+  el.textContent = '';
+  el.style.borderRight = '2px solid #c9a84c';
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    } else {
+      el.style.borderRight = 'none';
+      if (callback) callback();
+    }
+  }
+  type();
+}
+
+/* ── Open envelope ── */
+function openEnvelope(){
+  const wrap=document.getElementById('env-wrap');
+  wrap.style.animation='none';wrap.offsetHeight;
+  wrap.classList.add('closing');
+  spawnConfetti();
+  setTimeout(()=>{
+    document.getElementById('envelope-screen').style.display='none';
+    document.body.style.background='#fdf6f0';
+    document.getElementById('invitation').style.display='block';
+    buildStory();
+    buildGallery();
+    startCountdown();
+    buildVenuePetals();
+    initParallax();
+    fadeInMusic();
+    renderWishes();
+    
+    // Initialize cinematic scroll reveal and ending
+    initScrollReveal();
+    initCinematicEnding();
+    
+    // Typewriter effect triggered dramatically on opening
+    typeWriter('name-nada', 'Nada', 180, () => {
+      typeWriter('name-ahmed', 'Ahmed', 180);
+    });
+  },700);
+}
+
+/* ── Parallax venue ── */
+function initParallax(){
+  const bg=document.getElementById('venue-bg');
+  window.addEventListener('scroll',()=>{
+    const sec=document.getElementById('venue-bg').parentElement;
+    const rect=sec.getBoundingClientRect();
+    const pct=1-(rect.top+rect.height)/(window.innerHeight+rect.height);
+    bg.style.transform=`translateY(${(pct-0.5)*60}px)`;
+  },{passive:true});
+}
+
+/* ── Venue petals ── */
+function buildVenuePetals(){
+  const c=document.getElementById('venue-petals');
+  const cols=['#f4b8c8','#f9d0d8','#fbe0e8'];
+  for(let i=0;i<22;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${cols[i%cols.length]};animation-duration:${5+Math.random()*6}s;animation-delay:${Math.random()*6}s;`;
+    c.appendChild(p);
+  }
+}
+
+/* ── Story Timeline with 3D Flip Card layout ── */
+function buildStory(){
+  const container=document.getElementById('story-container');
+  story.forEach((m,i)=>{
+    const isLeft=i%2===0;
+    const row=document.createElement('div');
+    row.className='story-row';
+    row.style.cssText='display:flex;align-items:center;margin-bottom:36px;gap:0;perspective:1000px;';
+    
+    const frontHTML = `
+      <div style="font-size:11px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-bottom:6px;font-weight:600;">${m.date}</div>
+      <div style="font-family:'Cinzel',serif;font-size:14px;color:#3a1828;margin-bottom:8px;font-weight:bold;">${m.label}</div>
+      <div style="font-size:32px;margin-top:5px;">${m.icon}</div>
+      <div style="font-size:11px;letter-spacing:1px;color:#b06070;margin-top:10px;text-transform:uppercase;font-style:italic;">Click to read ♡</div>
+    `;
+    
+    const backHTML = `
+      <div style="font-family:'Cinzel',serif;font-size:13px;color:#3a1828;margin-bottom:8px;border-bottom:1px dashed #eddcb5;padding-bottom:5px;width:100%;text-align:center;font-weight:bold;">${m.label}</div>
+      <p style="font-style:italic;font-size:14px;color:#7a4a58;line-height:1.6;margin:0;text-align:center;">${m.text}</p>
+    `;
+    
+    const card = `
+      <div class="story-card" style="margin-${isLeft?'right':'left'}:28px; padding:0; background:transparent; border:none; box-shadow:none; height:185px;" onclick="this.classList.toggle('flipped')">
+        <div class="story-card-inner">
+          <div class="story-card-front">
+            ${frontHTML}
+          </div>
+          <div class="story-card-back">
+            ${backHTML}
+          </div>
+        </div>
+      </div>
+    `;
+    
+    const dot=`<div class="story-dot">${m.icon}</div>`;
+    const spacer=`<div class="spacer" style="flex:1;"></div>`;
+    row.innerHTML=isLeft?card+dot+spacer:spacer+dot+card;
+    container.appendChild(row);
+  });
+}
+
+/* ── Gallery ── */
+function buildGallery(){
+  const grid=document.getElementById('gallery-grid');
+  const labels=['Add your favourite photo ✦','A moment to remember ✦','Captured with love ✦','Our memories ✦','Share a smile ✦','A beautiful memory ✦'];
+  for(let i=0;i<6;i++){
+    const cell=document.createElement('div');
+    cell.className='gallery-placeholder';
+    
+    let imgStyle = 'display:none;';
+    let lblStyle = 'display:block;';
+    let imgSrc = '';
+    
+    if (i < 3) {
+      imgSrc = `gallery${i+1}.jpeg`;
+      imgStyle = 'display:block;';
+      lblStyle = 'display:none;';
+    }
+    
+    cell.innerHTML=`<img class="gallery-img" id="gimg-${i}" src="${imgSrc}" style="${imgStyle}" alt=""/><input type="file" accept="image/*" onchange="loadGalleryImg(event,${i})"/><span id="glbl-${i}" style="${lblStyle}">${labels[i]}</span>`;
+    grid.appendChild(cell);
+  }
+}
+function loadGalleryImg(e,i){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const img=document.getElementById('gimg-'+i);
+    img.src=ev.target.result;img.style.display='block';
+    document.getElementById('glbl-'+i).style.display='none';
+  };
+  r.readAsDataURL(f);
+}
+
+/* ── Countdown ── */
+function startCountdown(){
+  const target=new Date('2026-09-18T18:00:00');
+  const pad=n=>String(n).padStart(2,'0');
+  function update(){
+    const diff=Math.max(0,target-new Date());
+    document.getElementById('cd-days').textContent=pad(Math.floor(diff/86400000));
+    document.getElementById('cd-hours').textContent=pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-mins').textContent=pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-secs').textContent=pad(Math.floor((diff%60000)/1000));
+  }
+  update();setInterval(update,1000);
+}
+
+/* ── RSVP ── */
+function rsvpYes(){
+  document.getElementById('rsvp-confirm').style.display='block';
+  document.getElementById('rsvp-confirm').style.animation='rsvpPop .5s ease both';
+  spawnConfetti();
+}
+
+/* ── Save the Date ── */
+function saveDate(e){
+  e.preventDefault();
+  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20260918T180000\r\nDTEND:20260918T230000\r\nSUMMARY:Nada & Ahmed's Wedding\r\nLOCATION:Four Seasons Hotel, Alexandria, Egypt\r\nDESCRIPTION:You are cordially invited to the wedding of Nada & Ahmed.\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+  const blob=new Blob([ics],{type:'text/calendar'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='nada-ahmed-wedding.ics';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ── Love Letter Pocket Toggle ── */
+function toggleLoveLetter() {
+  const c = document.getElementById('love-letter-widget');
+  c.classList.toggle('open');
+}
+
+/* ── Custom Voice Note Player Widget ── */
+let voicePlaying = false;
+const voiceAudio = document.getElementById('voice-audio');
+const voicePlayBtn = document.getElementById('voice-play-btn');
+const voiceWidget = document.getElementById('voice-widget-player');
+const voiceTimer = document.getElementById('voice-timer');
+
+function toggleVoiceNote() {
+  if (voicePlaying) {
+    voiceAudio.pause();
+    voicePlayBtn.textContent = '▶';
+    voiceWidget.classList.remove('playing');
+    voicePlaying = false;
+  } else {
+    // Mute background wedding music automatically when voice note starts
+    if (musicStarted && !muted) {
+      bgm.muted = true;
+      document.getElementById('music-btn').textContent = '🔇';
+    }
+    voiceAudio.play().then(() => {
+      voicePlayBtn.textContent = '⏸';
+      voiceWidget.classList.add('playing');
+      voicePlaying = true;
+    }).catch(err => console.log("Voice note audio blocked: ", err));
+  }
+}
+
+voiceAudio.addEventListener('timeupdate', () => {
+  const cur = Math.floor(voiceAudio.currentTime);
+  const m = String(Math.floor(cur / 60)).padStart(2, '0');
+  const s = String(cur % 60).padStart(2, '0');
+  voiceTimer.textContent = `${m}:${s}`;
+});
+
+voiceAudio.addEventListener('ended', () => {
+  voicePlayBtn.textContent = '▶';
+  voiceWidget.classList.remove('playing');
+  voicePlaying = false;
+  voiceTimer.textContent = '00:00';
+  // Unmute background music when voice note has finished
+  if (musicStarted && !muted) {
+    bgm.muted = false;
+    document.getElementById('music-btn').textContent = '🔊';
+  }
+});
+
+/* ── Wishes Wall Guestbook controller ── */
+let wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+
+function renderWishes() {
+  const board = document.getElementById('wishes-board');
+  if (!board) return;
+  board.innerHTML = '';
+  
+  // Default sweet wish card
+  if (wishes.length === 0) {
+    wishes.push({
+      name: "Nada & Ahmed",
+      text: "We are so excited to celebrate our love with all of you! Feel free to pin your warm wishes right here on our digital wall. 💕"
+    });
+  }
+
+  wishes.forEach((w, idx) => {
+    const card = document.createElement('div');
+    card.className = 'wish-card';
+    
+    // Rotate sticky cards slightly to enhance digital wall layout
+    const rot = ((idx * 7) % 9) - 4;
+    card.style.setProperty('--rot', `${rot}deg`);
+    
+    card.innerHTML = `<div class="wish-name">${w.name}</div><div class="wish-text">"${w.text}"</div>`;
+    board.appendChild(card);
+  });
+}
+
+function postWish() {
+  const nameEl = document.getElementById('wish-name-input');
+  const textEl = document.getElementById('wish-text-input');
+  const errEl = document.getElementById('wish-error');
+  
+  const name = nameEl.value.trim();
+  const text = textEl.value.trim();
+  
+  if (!name || !text) {
+    errEl.textContent = 'Please enter both your name and a sweet message! ✦';
+    return;
+  }
+  
+  errEl.textContent = '';
+  wishes.unshift({ name, text });
+  
+  try {
+    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+  } catch(e) {}
+  
+  nameEl.value = '';
+  textEl.value = '';
+  
+  renderWishes();
+  spawnConfetti();
+}
+
+/* ── HTML5 Camera Photo Booth with Custom Overlay ── */
+let stream = null;
+const boothVideo = document.getElementById('booth-video');
+const boothCanvas = document.getElementById('booth-canvas');
+const boothContainer = document.getElementById('booth-container');
+const startBoothBtn = document.getElementById('start-booth-btn');
+const captureBtn = document.getElementById('capture-btn');
+const retakeBtn = document.getElementById('retake-btn');
+const downloadBtn = document.getElementById('download-btn');
+const boothStatus = document.getElementById('booth-status');
+
+let capturedImgData = null;
+
+function initPhotoBooth() {
+  boothStatus.textContent = 'Requesting camera access...';
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+    .then(s => {
+      stream = s;
+      boothVideo.srcObject = stream;
+      boothContainer.style.display = 'block';
+      startBoothBtn.style.display = 'none';
+      boothStatus.textContent = 'Camera connected. Smile! 😊';
+    })
+    .catch(err => {
+      console.log(err);
+      boothStatus.textContent = 'Unable to access webcam. Please check permissions.';
+    });
+}
+
+function capturePhoto() {
+  const ctx = boothCanvas.getContext('2d');
+  const w = boothVideo.videoWidth || 640;
+  const h = boothVideo.videoHeight || 480;
+  
+  boothCanvas.width = w;
+  boothCanvas.height = h;
+  
+  // Mirror canvas capture to feel natural
+  ctx.translate(w, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(boothVideo, 0, 0, w, h);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  
+  // Border frames
+  ctx.strokeStyle = '#c9a84c';
+  ctx.lineWidth = 14;
+  ctx.strokeRect(7, 7, w - 14, h - 14);
+  
+  ctx.strokeStyle = '#3a1828';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(18, 18, w - 36, h - 36);
+  
+  // Wedding details text banner
+  ctx.fillStyle = 'rgba(26,11,40,0.85)';
+  ctx.fillRect(w/2 - 170, h - 52, 340, 32);
+  ctx.strokeStyle = '#c9a84c';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(w/2 - 170, h - 52, 340, 32);
+  
+  ctx.fillStyle = '#f5e8d2';
+  ctx.font = 'bold 13px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('NADA & AHMED · 18.09.2026', w/2, h - 32);
+  
+  // Corner gold dots
+  ctx.fillStyle = '#c9a84c';
+  ctx.beginPath(); ctx.arc(12, 12, 4, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(w - 12, 12, 4, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(12, h - 12, 4, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(w - 12, h - 12, 4, 0, Math.PI*2); ctx.fill();
+  
+  capturedImgData = boothCanvas.toDataURL('image/png');
+  
+  // Toggle states
+  boothVideo.style.display = 'none';
+  captureBtn.style.display = 'none';
+  retakeBtn.style.display = 'inline-flex';
+  downloadBtn.style.display = 'inline-flex';
+  boothStatus.textContent = 'Photo captured successfully!';
+  
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+  }
+}
+
+function retakePhoto() {
+  boothVideo.style.display = 'block';
+  captureBtn.style.display = 'inline-flex';
+  retakeBtn.style.display = 'none';
+  downloadBtn.style.display = 'none';
+  initPhotoBooth();
+}
+
+function downloadPhoto() {
+  if (!capturedImgData) return;
+  const link = document.createElement('a');
+  link.href = capturedImgData;
+  link.download = 'nada-ahmed-selfie.png';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+/* ── Scroll Reveal Sequence ── */
+function initScrollReveal() {
+  const sections = document.querySelectorAll('.reveal-section');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        if (entry.target.id === 'cinematic-ending') {
+          triggerCinematicEndingParticles();
+        }
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  sections.forEach(sec => observer.observe(sec));
+}
+
+/* ── Cinematic Ending ── */
+function initCinematicEnding() {
+  const starsContainer = document.getElementById('ending-stars');
+  if(!starsContainer) return;
+  
+  for(let i=0; i<45; i++){
+    const star = document.createElement('div');
+    const size = Math.random() * 2 + 0.5;
+    star.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      background: #fff;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      opacity: ${Math.random() * 0.4 + 0.12};
+      animation: starTwinkle ${2 + Math.random() * 3}s ${Math.random() * 2}s ease-in-out infinite;
+    `;
+    starsContainer.appendChild(star);
+  }
+}
+
+let endingParticlesInterval = null;
+function triggerCinematicEndingParticles() {
+  const particlesContainer = document.getElementById('ending-particles');
+  if(!particlesContainer || endingParticlesInterval) return;
+  
+  const colors = ['#c9a84c', '#f5e8d2', '#eddcb5'];
+  
+  function spawnParticle() {
+    if(particlesContainer.childElementCount > 45) return;
+    
+    const p = document.createElement('div');
+    const size = Math.random() * 3.5 + 1.5;
+    const left = Math.random() * 100;
+    const duration = Math.random() * 6 + 5; // 5s to 11s
+    
+    p.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      left: ${left}%;
+      bottom: -10px;
+      opacity: 0;
+      pointer-events: none;
+      animation: endingDrift ${duration}s ease-in-out forwards;
+    `;
+    
+    particlesContainer.appendChild(p);
+    setTimeout(() => p.remove(), duration * 1000);
+  }
+  
+  endingParticlesInterval = setInterval(spawnParticle, 260);
+}
+
+/* ── Pre-envelope Loading sequence fadeout ── */
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loading-screen');
+    if (loader) {
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      setTimeout(() => {
+        loader.remove();
+      }, 850);
+    }
+  }, 2350);
+});
+</script>
+</body>
+</html>
