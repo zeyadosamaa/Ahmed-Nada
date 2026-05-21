@@ -672,9 +672,9 @@ html {
 }
 
 @media(max-width:600px){
-  .story-row{flex-direction:column!important;align-items:flex-start!important;}
+  .story-row{flex-direction:column!important;align-items:center!important;}
   .story-row .spacer{display:none!important;}
-  .story-card{margin:0!important;margin-top:12px!important;}
+  .story-card{margin:0!important;margin-top:12px!important;width:100%!important;margin-left:0!important;margin-right:0!important;}
   .story-dot{margin:0 auto!important;}
   .gallery-grid{grid-template-columns:1fr 1fr;}
 }
@@ -1309,7 +1309,7 @@ function buildStory(){
     `;
     
     const card = `
-      <div class="story-card" style="margin-${isLeft?'right':'left'}:28px; padding:0; background:transparent; border:none; box-shadow:none; height:185px;" onclick="this.classList.toggle('flipped')">
+      <div class="story-card" style="${isLeft?'margin-right':'margin-left'}:28px; padding:0; background:transparent; border:none; box-shadow:none; height:185px;" onclick="this.classList.toggle('flipped')">
         <div class="story-card-inner">
           <div class="story-card-front">
             ${frontHTML}
